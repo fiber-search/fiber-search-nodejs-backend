@@ -19,13 +19,15 @@ class Link {
 
         })(this.url.pathname);
         this.hash = this.url.hash;
-        this.search = ((params) => {
+        this.params = ((params) => {
             var result = {};
             params.forEach((value, key) => {
                 result[key] = value;
             })
             return result;
         })(this.url.searchParams)
+
+        
     };
     url;
     protocol;
@@ -34,6 +36,16 @@ class Link {
     path;
     hash;
     params;
+
+    pure() {
+        return `${this.protocol}//${this.hostname}${this.port == "80" ? "" : ":" + this.port}${(() => {
+            var pathStr = "";
+            for (let i = 0; i < this.path.length; i++) {
+                pathStr = pathStr + "/" + this.path[i];
+            }
+            return pathStr;
+        })()}`;
+    };
 }
 
 export default Link;
