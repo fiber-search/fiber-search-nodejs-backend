@@ -27,7 +27,6 @@ class Link {
             return result;
         })(this.url.searchParams)
 
-        
     };
     url;
     protocol;
@@ -38,7 +37,17 @@ class Link {
     params;
 
     pure() {
-        return `${this.protocol}//${this.hostname}${this.port == "80" ? "" : ":" + this.port}${(() => {
+        return `${this.protocol}//${this.hostname}${(() => {
+            if (this.port) {
+                if (this.port == "80") {
+                    return "";
+                } else {
+                    return ":" + this.port;
+                }
+            } else {
+                return "";
+            }
+        })()}${(() => {
             var pathStr = "";
             for (let i = 0; i < this.path.length; i++) {
                 pathStr = pathStr + "/" + this.path[i];
