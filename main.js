@@ -13,8 +13,9 @@ server.on('request', (request, response) => {
     var reqLink = new Link(`https://example.com${request.url}`);
     switch (reqLink.params.type) {
         case "record":
-            SHOW_RECORD_URL ? console.log(reqLink.params.url) : console.log("A new record.");
-            responseObj = { status: "success", url: reqLink.params.url };
+            var recordUrl = new Link(reqLink.params.url).pure();
+            SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
+            responseObj = { status: "success", url: recordUrl };
             break;
 
         default:
