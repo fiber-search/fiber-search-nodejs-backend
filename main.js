@@ -6,6 +6,7 @@ const PORT = 48534;
 const SHOW_RECORD_URL = true;
 
 var server = http.createServer();
+var redis = require('redis').createClient();
 
 server.on('request', (request, response) => {
     var responseObj = {};
