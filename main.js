@@ -1,6 +1,6 @@
-import http from 'http';
+const http = require('http');
 
-import Link from './modules/link.js';
+const Link = require('./modules/link.js');
 
 const PORT = 48534;
 const SHOW_RECORD_URL = true;
@@ -16,6 +16,12 @@ server.on('request', (request, response) => {
             var recordUrl = new Link(reqLink.params.url).pure();
             SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
             responseObj = { status: "success", url: recordUrl };
+            break;
+
+        case "s":
+            var keyword = reqLink.params['s'];
+            console.log(`A new search: ${keyword}.`)
+            responseObj = { status: "success", s: keyword };
             break;
 
         default:

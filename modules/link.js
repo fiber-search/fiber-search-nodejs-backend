@@ -57,4 +57,4 @@ class Link {
     };
 }
 
-export default Link;
+module.exports = Link;
