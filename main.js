@@ -14,7 +14,7 @@ mongoose.connect(CONFIG.MONGODB_URI, {
     console.log(`MongoDB connected with ${CONFIG.MONGODB_URI}`);
 
     httpServer.setup(server);
-    server.listen(ENV.PORT, () => {
+    server.listen(CONFIG.PORT, () => {
         console.log(`Server listening at port ${CONFIG.PORT}`);
     })
 })
