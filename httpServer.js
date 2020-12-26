@@ -1,11 +1,6 @@
+const CONFIG = require('./config.js')
 const Link = require('./modules/link.js');
 const dbModels = require('./db/models.js')
-
-var ENV;
-
-function setENV(providedENV) {
-    ENV = providedENV;
-}
 
 function setup(server) {
     server.on('request', (request, response) => {
@@ -15,7 +10,7 @@ function setup(server) {
         switch (reqLink.params.type) {
             case "record":
                 var recordUrl = new Link(reqLink.params.url).pure();
-                ENV.SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
+                CONFIG.SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
                 responseObj = { status: "success", url: recordUrl };
                 break;
 
@@ -35,4 +30,4 @@ function setup(server) {
     })
 }
 
-module.exports = { setENV, setup };
+module.exports = { setup };
