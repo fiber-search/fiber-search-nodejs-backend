@@ -3,6 +3,6 @@
         "start": "node main.js"
     },
     "dependencies": {
-        "redis": "^3.0.2"
+        "mongoose": "^5.11.8"
     }
 }

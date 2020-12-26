@@ -1,39 +1,26 @@
 const http = require('http');
 
-const Link = require('./modules/link.js');
+const httpServer = require('./httpServer.js')
+const db = require('./httpServer.js')
 
-const PORT = 48534;
-const SHOW_RECORD_URL = true;
+const ENV = {
+    PORT: 48534,
+    SHOW_RECORD_URL: true,
+    MONGODB_URI: 'mongodb://localhost:27017/fiber-search',
+}
+httpServer.setENV(ENV);
 
 var server = http.createServer();
-var redis = require('redis').createClient();
+const mongoose = require('mongoose');
 
-server.on('request', (request, response) => {
-    var responseObj = {};
+mongoose.connect(ENV.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
+    console.log(`MongoDB connected with ${ENV.MONGODB_URI}`);
 
-    var reqLink = new Link(`https://example.com${request.url}`);
-    switch (reqLink.params.type) {
-        case "record":
-            var recordUrl = new Link(reqLink.params.url).pure();
-            SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
-            responseObj = { status: "success", url: recordUrl };
-            break;
-
-        case "s":
-            var keyword = reqLink.params['s'];
-            console.log(`A new search: ${keyword}.`)
-            responseObj = { status: "success", s: keyword };
-            break;
-
-        default:
-            break;
-    }
-
-    response.write(JSON.stringify(responseObj));
-
-    response.end();
-})
-
-server.listen(PORT, () => {
-    console.log(`Server listening at port ${PORT}`)
+    httpServer.setup(server);
+    server.listen(ENV.PORT, () => {
+        console.log(`Server listening at port ${ENV.PORT}`);
+    })
 })
