@@ -35,8 +35,6 @@ const Schema = {
             required: true,
             trim: true
         },
-    }, {
-        timestamps: true
     })
 }
 

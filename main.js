@@ -14,6 +14,6 @@ mongoose.connect(CONFIG.MONGODB_URI, {
 
     httpServer.setup(server);
     server.listen(CONFIG.PORT, () => {
-        console.log(`Server listening at port ${CONFIG.PORT}`);
+        console.log(`Fiber Search Backend Server listening at port ${CONFIG.PORT}`);
     })
 })
