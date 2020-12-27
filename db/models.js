@@ -30,6 +30,11 @@ const Schema = {
             required: true,
             trim: true
         },
+        lastUpdated: {
+            type: String,
+            required: true,
+            trim: true
+        },
     }, {
         timestamps: true
     })

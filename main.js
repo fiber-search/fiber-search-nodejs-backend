@@ -1,8 +1,7 @@
 const http = require('http');
 
 const CONFIG = require('./config.js')
-const httpServer = require('./httpServer.js')
-const db = require('./httpServer.js')
+const httpServer = require('./http/httpServer.js')
 
 var server = http.createServer();
 const mongoose = require('mongoose');
