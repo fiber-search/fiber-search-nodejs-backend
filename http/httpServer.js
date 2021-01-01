@@ -6,6 +6,7 @@ const db = require('../db/models.js')
 function setup(server) {
     server.on('request', (request, response) => {
         var responseObj = {};
+        response.setHeader("Access-Control-Allow-Origin", CONFIG.WEBSITE_FRONTEND_URL);
         function sendResponse() {
             response.write(JSON.stringify(responseObj));
             response.end();
@@ -37,10 +38,8 @@ function setup(server) {
                 var keyword = reqLink.params['s'];
                 responseObj = { status: "success", s: keyword, result: [] };
 
-                db.browsingHistory.find({ url: { $regex: keyword, $options: "i" } }).sort({frequency: -1}).then((rows) => {
+                db.browsingHistory.find({ url: { $regex: keyword, $options: "i" } }).sort({frequency: -1}).limit(20).then((rows) => {
                     for (const i in rows) {
-                        if (i > 20) { continue }
-
                         const el = rows[i];
 
                         responseObj.result.push({
