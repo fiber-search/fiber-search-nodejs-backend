@@ -25,6 +25,11 @@ const Schema = {
             required: true,
             trim: false
         },
+        title: {
+            type: String,
+            required: false,
+            trim: true
+        },
         frequency: {
             type: Number,
             required: true,
