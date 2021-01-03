@@ -47,6 +47,7 @@ function setup(server) {
                         row.updateOne(tmp).then(() => {
                             responseObj = { status: "success" };
                             sendResponse();
+                            CONFIG.SHOW_RECORD_URL ? console.log(`${recordUrl} (no-increasing) : ${JSON.stringify(tmp)}`) : console.log("A new record.");
                         })
                     } else {
                         responseObj = { status: "failed", desc: "cannot find requested url in the database" }
@@ -54,7 +55,6 @@ function setup(server) {
                     }
                 })
 
-                CONFIG.SHOW_RECORD_URL ? console.log(recordUrl) : console.log("A new record.");
                 break;
 
             case "s":
